@@ -10,6 +10,12 @@ default: objectclass: nsContainer
 default: objectclass: postfixConfiguration
 default: defaultMailboxTransport: lmtp:unix:private/dovecot-lmtp
 
+# Postfix Transports
+dn: cn=transports,cn=postfix,cn=mailserver,cn=etc,$SUFFIX
+default: objectclass: top
+default: objectclass: nsContainer
+default: objectclass: postfixConfiguration
+
 # Dovecot configuration
 dn: cn=dovecot,cn=mailserver,cn=etc,$SUFFIX
 default: objectclass: top
@@ -21,3 +27,16 @@ dn: cn=ipaConfig,cn=etc,$SUFFIX
 add:ipaUserObjectClasses: mailSenderEntity
 add:ipaUserObjectClasses: mailReceiverEntity
 add:ipaUserObjectClasses: mailboxEntity
+
+dn: uid=postfix,cn=sysaccounts,cn=etc,$SUFFIX
+default:objectclass:account
+default:objectclass:simplesecurityobject
+default:objectclass:inetuser
+default:uid:postfix
+# default:memberof:cn=System: Read Mail Server Postfix Configuration,cn=permissions,cn=pbac,$SUFFIX
+# YOU WILL NEED TO SET THE PASSWORD VIA APACHE DIRECTORY STUDIO OR EQUIV BEFORE USING
+default:userPassword:
+default:nsIdleTimeout:0
+
+dn: cn=System: Read Mail Server Postfix Configuration,cn=permissions,cn=pbac,$SUFFIX
+add:member:uid=postfix,cn=sysaccounts,cn=etc,$SUFFIX

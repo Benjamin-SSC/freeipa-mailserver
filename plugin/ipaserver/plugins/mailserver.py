@@ -526,13 +526,13 @@ class postfixconfig(LDAPObject):
         'defaultMailboxTransport'
     ]
     container_dn = DN(('cn', 'postfix'), ('cn', 'mailserver'), ('cn', 'etc'))
-    permission_filter_objectclasses = ["postfixConfiguration"]
+    permission_filter_objectclasses = ["postfixConfiguration", "transportTable"]
     managed_permissions = {
         'System: Read Mail Server Postfix Configuration': {
             'ipapermbindruletype': 'permission',
             'ipapermright': {'read', 'search', 'compare'},
             'ipapermdefaultattr': {
-                'cn', 'objectclass', 'virtualdomain', 'defaultMailboxTransport'
+                'cn', 'objectclass', 'virtualdomain', 'defaultMailboxTransport', 'transport'
             }
         },
         'System: Modify Mail Server Postfix Configuration': {

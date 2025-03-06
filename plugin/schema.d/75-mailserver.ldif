@@ -25,6 +25,13 @@
 # .7    mailboxEntity
 # .8    dovecotConfiguration
 
+# Postfix OIDs Included:
+# 1.3.6.1.4.1.15347       Postfix LDAPAdmin OID
+# Object classes:
+# .2.3    transportTable (the cn is set to the domain)
+# Attributes:
+# .2.102  transport (this is the postfix transport result)
+
 dn: cn=schema
 changetype: modify
 add: attributetypes
@@ -85,6 +92,9 @@ attributetypes: ( 1.3.6.1.4.1.25725.1.1.10 NAME 'defaultMailboxTransport'
   SUBSTR caseIgnoreSubstringsMatch
   SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
   SINGLE-VALUE )
+attributetypes: ( 1.3.6.1.4.1.15347.2.102 NAME 'transport'
+  DESC 'Postfix Transport Result'
+  SUP name )
 -
 add: objectClasses
 objectClasses: ( 1.3.6.1.4.1.25725.2.2.2 NAME 'mailenabledGroup'
@@ -113,3 +123,8 @@ objectClasses: ( 1.3.6.1.4.1.25725.2.2.8 NAME 'dovecotConfiguration'
   DESC 'General Dovecot configuration'
   SUP ( nsContainer ) STRUCTURAL
   MAY ( defaultMailboxQuota ) )
+objectClasses: ( 1.3.6.1.4.1.15347.2.3 NAME 'transportTable'
+  DESC 'MTA Transport Table (cn=domain)'
+  SUP top
+  STRUCTURAL
+  MUST ( cn $ transport ) )
