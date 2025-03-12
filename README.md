@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/Carbenium/freeipa-mailserver/actions/workflows/main.yml/badge.svg)](https://github.com/Carbenium/freeipa-mailserver/actions/workflows/main.yml)
 
+NOTE: This repo has been forked from upstream, and modified for our company use. If you've found this via a search, I hope you find it useful.
+
 A FreeIPA extension to handle the configuration of a Postfix/Dovecot mail server setup.
 
 The LDAP schema allows the configuration of:
